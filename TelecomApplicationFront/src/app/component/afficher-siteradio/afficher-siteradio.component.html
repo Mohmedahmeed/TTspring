@@ -1,0 +1,270 @@
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h4 class="card-title mb-0 text-primary display-7" >Liste Des Sites Radios</h4>
+    <div>
+      <button type="button" class="btn btn-outline-primary me-2" (click)="exporterSiteRadioPDF()">Exporter Site Radio PDF</button>
+      <button type="button" class="btn btn-outline-primary" (click)="naviguerVersAjouter()">Ajouter Site Radio</button>
+    </div>
+    </div>
+  </div>
+  
+<div class="row mb-4">
+  <div class="col-12">
+    <label for="typeSite" class="form-label">Rechercher site radio :</label>
+    <select class="form-select" id="searchTypeSite" [(ngModel)]="selectedTypeSite" (change)="searchSiteRadios()">
+      <option *ngFor="let type of typeSiteOptions" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-middle text-nowrap table-bg">
+              <thead>
+                <tr>
+                  <th class="text-dark font-medium fs-4">Numero</th>
+                  <th class="text-dark font-medium fs-4">Adresse</th>
+                  <th class="text-dark font-medium fs-4">Cordonnees</th>
+                  <!--th class="text-dark font-medium fs-4">nbrModuleRadioLogique</th-->
+                  <!--th class="text-dark font-medium fs-4">nbrModuleRadioPhysique</th-->
+                  <th class="text-dark font-medium fs-4">Equipement</th>
+                  <th class="text-dark font-medium fs-4">Technologie</th>
+                  <th class="text-dark font-medium fs-4">Type</th>
+                  <th class="text-dark font-medium fs-4">Acess</th>
+                  <th class="text-dark font-medium fs-4">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let siteradios of siteradios" >
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-3">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.idSiteRadio }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.adresse }}</h5>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-0">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.cordonnees }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <!--td class="text-center">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.nbrModuleRadio_Logique }}</h5>
+                    </div>
+                  </td-->
+                  <!--td class="text-center">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.nbrModuleRadio_Physique }}</h5>
+                    </div>
+                  </td-->
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-4">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.equipement }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-4">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.technologieSite }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ms-0">
+                      <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.typeSite }}</h5>
+                    </div>
+                  </td>
+                  <td>
+                      <div class="ms-0">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ siteradios.accesSite }}</h5>
+                      
+                    </div>
+                  </td>
+                  <td>
+                      <div class="ms-0">
+                      <button type="button" class="btn btn-outline-info me-2" [routerLink]="['/component/modifiersiteradio', siteradios.idSiteRadio]">
+                        <i class="bi bi-check me-1"></i> Update
+                      </button>
+                       
+                        <button type="button" class="btn btn-outline-danger"(click)="modalOpenDanger(siteradios, modalDanger)">
+                          <i class="bi bi-bell me-1"></i> delete </button>
+                      </div>
+                  </td>
+                </tr>
+
+                <!--modal-->
+                <ng-template #modalDanger let-modal>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel160">
+                      Supprimer siteradio
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      (click)="modal.dismiss('Cross click')"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" tabindex="0" ngbAutofocus>
+                    La suppression du siteradio va engedrer la suppression de la configuration des antennes et transmissions. Voulez vous toujours continuer?
+                  </div>
+                  <div class="modal-footer">
+                    <div>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="deleteSelectedSiteradio()"
+                        rippleEffect
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+      
+                    <div *ngIf="showSucessDelete" class="alert alert-success mt-3">
+                      siteradio supprimé avec succés!
+                    </div>
+                  </div>
+                </ng-template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- Antennes -->
+<div class="row mb-3">
+  <div class="col-12 d-flex justify-content-center align-items-center">
+    <h4 class="card-title mb-0 text-primary display-7">Antennes</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-middle text-nowrap table-bg">
+            <thead>
+              <tr>
+                <th class="text-dark font-medium fs-4">Nombre d'Antennes</th>
+                <th class="text-dark font-medium fs-4">Position Antenne</th>
+                <th class="text-dark font-medium fs-4">Type Fournisseur</th>
+                <th class="text-dark font-medium fs-4">Détails SiteRadio</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor="let siteradio of siteradios" >
+                <ng-container *ngFor="let antenne of siteradio.antennes">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-5">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ antenne.nbrAntenne }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-4">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ antenne.positionAntenne }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-4">
+                        <h5 class="mb-0 fw-normal text-dark-gray">{{ antenne.typeFournisseur }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="ms-0">
+                        <button type="button" class="btn btn-outline-info ms-1" (click)="loadSiteRadioDetails(antenne.idAntenne)">
+                          <i class="bi bi-check me-1"></i> Site Radio
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--transmissions-->
+
+<div class="row mb-2">
+  <div class="col-12 d-flex justify-content-center align-items-center">
+    <h4 class="card-title mb-0 text-primary display-7">Transmissions</h4>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-middle text-nowrap table-bg">
+                    <thead>
+                        <tr>
+                            <th class="text-dark font-medium fs-4">Path</th>
+                            <th class="text-dark font-medium fs-4">Catégorie Support</th>
+                            <th class="text-dark font-medium fs-4">Détails SiteRadio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let siteradio of siteradios"  >
+                            <td *ngFor="let transmission of siteradio.transmissions">
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-2">
+                                        <h5 class="mb-0 fw-normal text-dark-gray">{{ transmission.path  }}</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td *ngFor="let transmission of siteradio.transmissions">
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-4">
+                                        <h5 class="mb-0 fw-normal text-dark-gray">{{ transmission.categorieSupport }}</h5>
+                                    </div>
+                                </div>
+                           </td>
+                           <td *ngFor="let transmission of siteradio.transmissions">
+                            <div class="d-flex align-items-center">
+                              
+                              <button type="button" class="btn btn-outline-info ms-1" (click)="loadSiteRadioDetailsT(transmission.idTransmission)">
+                                <i class="bi bi-check me-1"></i> Site Radio
+                              </button>
+                              
+                            </div>
+                           </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

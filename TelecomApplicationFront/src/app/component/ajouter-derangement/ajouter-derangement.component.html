@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Ajouter un Dérangement</h2>
+  <form (ngSubmit)="onSubmit()" #derangementForm="ngForm">
+    
+    <div class="form-group">
+      <label for="siteRadioId">ID du Site Radio</label>
+      <input type="number" id="siteRadioId" name="siteRadioId" [(ngModel)]="derangement.idSiteRadio" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="dateDerangement">Date du Dérangement</label>
+      <input type="date" id="dateDerangement" name="dateDerangement" [(ngModel)]="derangement.dateDerangement" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="probAcces">Problème d'Accès</label>
+      <input type="number" id="probAcces" name="probAcces" [(ngModel)]="derangement.probAcces" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="action">Action</label>
+      <input type="text" id="action" name="action" [(ngModel)]="derangement.action" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="typeDerangement">Type de Dérangement</label>
+      <select id="typeDerangement" name="typeDerangement" [(ngModel)]="derangement.typeDerangement" class="form-control">
+        <option value="Transmission">Transmission</option>
+        <option value="Environnement">Environnement</option>
+        <option value="Hard">Hard</option>
+        <option value="Soft">Soft</option>
+        <option value="Energie">Energie</option>
+        <option value="Qualité">Qualité</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </form>
+</div>

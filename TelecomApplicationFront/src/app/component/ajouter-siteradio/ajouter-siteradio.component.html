@@ -1,0 +1,119 @@
+<form [formGroup]="siteRadioForm" (ngSubmit)="saveSiteRadio()" class="projet-form">
+  <div class="form-section">
+    <h2>Site Radio</h2>
+
+    <div class="form-group">
+      <label for="adresse">Adresse:</label>
+      <input type="text" id="adresse" formControlName="adresse" />
+    </div>
+
+    <div class="form-group">
+      <label for="cordonnees">Coordonnées:</label>
+      <input type="text" id="cordonnees" formControlName="cordonnees" />
+    </div>
+
+    <div class="form-group">
+      <label for="nbrModuleRadio_Logique">Nombre de Modules Radio Logiques:</label>
+      <input type="number" id="nbrModuleRadio_Logique" formControlName="nbrModuleRadio_Logique" />
+    </div>
+
+    <div class="form-group">
+      <label for="nbrModuleRadio_Physique">Nombre de Modules Radio Physiques:</label>
+      <input type="number" id="nbrModuleRadio_Physique" formControlName="nbrModuleRadio_Physique" />
+    </div>
+
+    <div class="form-group">
+      <label for="equipement">Équipement:</label>
+      <input type="text" id="equipement" formControlName="equipement" />
+    </div>
+
+    <div class="form-group">
+      <label for="categorieSite">Catégorie du Site:</label>
+      <select id="categorieSite" formControlName="categorieSite">
+        <option value="Macro">Macro</option>
+        <option value="Micro">Micro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="technologieSite">Technologie du Site:</label>
+      <select id="technologieSite" formControlName="technologieSite">
+        <option value="Tec2G">Tec2G</option>
+        <option value="Tec3G">Tec3G</option>
+        <option value="Tec4G">Tec4G</option>
+        <option value="Tec5G">Tec5G</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="typeSite">Type de Site:</label>
+      <select id="typeSite" formControlName="typeSite">
+        <option value="Indoor">Indoor</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="accesSite">Accès au Site:</label>
+      <select id="accesSite" formControlName="accesSite">
+        <option value="Authorisee">Authorisee</option>
+        <option value="NonAuthorisee">NonAuthorisee</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h4>Antennes</h4>
+    <div formArrayName="antennes">
+      <div *ngFor="let antenne of antennes.controls; let i = index" [formGroupName]="i" class="form-group">
+        <label for="nbrAntenne{{i}}">Nombre d'Antennes:</label>
+        <input type="number" id="nbrAntenne{{i}}" formControlName="nbrAntenne" />
+
+        <label for="positionAntenne{{i}}">Position de l'Antenne:</label>
+        <select id="positionAntenne{{i}}" formControlName="positionAntenne">
+          <option value="TILT">TILT</option>
+          <option value="AZIMUT">AZIMUT</option>
+        </select>
+
+        <label for="typeFournisseur{{i}}">Type de Fournisseur:</label>
+        <select id="typeFournisseur{{i}}" formControlName="typeFournisseur">
+          <option value="KATHREIN">KATHREIN</option>
+          <option value="JAYBEAM">JAYBEAM</option>
+          <option value="HUAWEI">HUAWEI</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" (click)="ajouterAntenne()" class="btn btn-secondary">Ajouter Antenne</button>
+  </div>
+
+  <div class="form-section">
+    <h4>Transmissions</h4>
+    <div formArrayName="transmissions">
+      <div *ngFor="let transmission of transmissions.controls; let i = index" [formGroupName]="i" class="form-group">
+        <label for="path{{i}}">Path:</label>
+        <input type="text" id="path{{i}}" formControlName="path" />
+
+        <label for="categorieSupport{{i}}">Catégorie de Support:</label>
+        <select id="categorieSupport{{i}}" formControlName="categorieSupport">
+          <option value="HDSL">HDSL</option>
+          <option value="Fisceaux">Fisceaux</option>
+          <option value="Fibre">Fibre</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" (click)="ajouterTransmission()" class="btn btn-secondary">Ajouter Transmission</button>
+  </div>
+
+  <div class="form-section">
+    <button type="submit" [disabled]="siteRadioForm.invalid" class="btn btn-primary">Enregistrer SiteRadio</button>
+  </div>
+<!-- Success Message Alert -->
+<div class="card w-100 mt-3" *ngIf="showAlert">
+  <div class="card-body">
+    <ngb-alert type="success" [dismissible]="false" class="customize-alert fs-4">
+      Site Radio ajouté avec succès!
+    </ngb-alert>
+  </div>
+</div>
+</form>

@@ -1,0 +1,20 @@
+<div class="row">
+  <div *ngFor="let derangement of derangements" class="col-lg-3 col-md-6">
+    <div class="card bg-danger text-white mb-3">
+      <div class="card-body">
+        <h4 class="card-title text-white">Dérangement {{ derangement.idDerangement }}</h4>
+        <p class="card-text">
+          Date: {{ derangement.dateDerangement | date:'short' }}<br>
+          Problème d'accès: {{ derangement.probAcces }}<br>
+          Action: {{ derangement.action }}<br>
+          Type: {{ derangement.typeDerangement }}<br>
+          Site Radio: {{ derangement.idSiteRadio }} <!-- Correction ici pour utiliser 'idSiteRadio' -->
+        </p>       
+        <a class="btn btn-dark"*ngIf="derangement?.idDerangement" (click)="modifierDerangement(derangement.idDerangement)">Modifier</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+  
+    

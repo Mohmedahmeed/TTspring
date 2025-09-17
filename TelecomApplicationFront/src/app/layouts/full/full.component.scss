@@ -1,0 +1,16 @@
+.max-width {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.logo-text {
+  font-size: 17px; /* Taille du texte */
+  font-weight: bold; /* Texte en gras */
+  color: #007bff; /* Couleur bleue */
+  font-family: 'Arial', sans-serif; /* Choisir une police de caractères */
+  letter-spacing: 2px; /* Espacement des lettres pour un effet stylisé */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre portée pour un effet 3D */
+  background: linear-gradient(to right, #007bff, #00d4ff); /* Dégradé de couleur */
+  -webkit-background-clip: text; /* Clip le fond au texte pour montrer le dégradé */
+  color: transparent; /* Rendre le texte transparent pour afficher le dégradé */
+}
+

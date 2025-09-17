@@ -1,0 +1,34 @@
+<div *ngIf="derangement">
+    <form (ngSubmit)="updateDerangement()">
+      <div class="form-group">
+        <label for="dateDerangement">Date de Dérangement</label>
+        <input type="date" id="dateDerangement" [(ngModel)]="derangement.dateDerangement" name="dateDerangement" class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="probAcces">Problème d'accès</label>
+        <input type="number" id="probAcces" [(ngModel)]="derangement.probAcces" name="probAcces" class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="action">Action</label>
+        <input type="text" id="action" [(ngModel)]="derangement.action" name="action" class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="typeDerangement">Type de Dérangement</label>
+        <select id="typeDerangement" [(ngModel)]="derangement.typeDerangement" name="typeDerangement" class="form-control">
+          <option value="Transmission">Transmission</option>
+          <option value="Environnement">Environnement</option>
+          <option value="Hard">Hard</option>
+          <option value="Soft">Soft</option>
+          <option value="Energie">Energie</option>
+          <option value="Qualité">Qualité</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </form>
+  </div>
+  

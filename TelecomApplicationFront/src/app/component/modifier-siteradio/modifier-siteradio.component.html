@@ -1,0 +1,129 @@
+<div class="container">
+  <h2>Modifier SiteRadio</h2>
+  <form [formGroup]="siteRadioForm" (ngSubmit)="onSubmit()">
+    <!-- Champs de formulaire pour SiteRadio -->
+    <div class="form-group">
+      <label for="adresse">Adresse</label>
+      <input id="adresse" formControlName="adresse" class="form-control" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="cordonnees">Coordonnées</label>
+      <input id="cordonnees" formControlName="cordonnees" class="form-control" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="nbrModuleRadio_Logique">Nombre de Modules Radio Logique</label>
+      <input id="nbrModuleRadio_Logique" formControlName="nbrModuleRadio_Logique" class="form-control" type="number" />
+    </div>
+
+    <div class="form-group">
+      <label for="nbrModuleRadio_Physique">Nombre de Modules Radio Physique</label>
+      <input id="nbrModuleRadio_Physique" formControlName="nbrModuleRadio_Physique" class="form-control" type="number" />
+    </div>
+
+    <div class="form-group">
+      <label for="equipement">Équipement</label>
+      <input id="equipement" formControlName="equipement" class="form-control" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="categorieSite">Catégorie du Site</label>
+      <select id="categorieSite" formControlName="categorieSite" class="form-control">
+        <option value="HDSL">HDSL</option>
+        <option value="Fisceaux">Fisceaux</option>
+        <option value="Fibre">Fibre</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="technologieSite">Technologie du Site</label>
+      <select id="technologieSite" formControlName="technologieSite" class="form-control">
+        <option value="Tec2G">Tec2G</option>
+        <option value="Tec3G">Tec3G</option>
+        <option value="Tec4G">Tec4G</option>
+        <option value="Tec5G">Tec5G</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="typeSite">Type du Site</label>
+      <select id="typeSite" formControlName="typeSite" class="form-control">
+        <option value="Indoor">Indoor</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="accesSite">Accès au Site</label>
+      <select id="accesSite" formControlName="accesSite" class="form-control">
+        <option value="Authorisee">Authorisée</option>
+        <option value="NonAuthorisee">Non Authorisée</option>
+      </select>
+    </div>
+
+    <!-- Gestion des Antennes -->
+    <div formArrayName="antennes">
+      <h3>Antennes</h3>
+      <div *ngFor="let antenne of antennes.controls; let i = index" [formGroupName]="i">
+        <div class="form-group">
+          <label for="nbrAntenne">Nombre d'antennes</label>
+          <input id="nbrAntenne" formControlName="nbrAntenne" class="form-control" type="number" />
+        </div>
+
+        <div class="form-group">
+          <label for="positionAntenne">Position Antenne</label>
+          <select id="positionAntenne" formControlName="positionAntenne" class="form-control">
+            <option value="TILT">TILT</option>
+            <option value="AZIMUT">AZIMUT</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="typeFournisseur">Type de Fournisseur</label>
+          <select id="typeFournisseur" formControlName="typeFournisseur" class="form-control">
+            <option value="KATHREIN">KATHREIN</option>
+            <option value="JAYBEAM">JAYBEAM</option>
+            <option value="HUAWEI">HUAWEI</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="removeAntenne(i)">Supprimer Antenne</button>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="addAntenne()">Ajouter Antenne</button>
+    </div>
+
+    <!-- Gestion des Transmissions -->
+    <div formArrayName="transmissions">
+      <h3>Transmissions</h3>
+      <div *ngFor="let transmission of transmissions.controls; let i = index" [formGroupName]="i">
+        <div class="form-group">
+          <label for="path">Path</label>
+          <input id="path" formControlName="path" class="form-control" type="number" />
+        </div>
+
+        <div class="form-group">
+          <label for="categorieSupport">Catégorie de Support</label>
+          <select id="categorieSupport" formControlName="categorieSupport" class="form-control">
+            <option value="HDSL">HDSL</option>
+            <option value="Fisceaux">Fisceaux</option>
+            <option value="Fibre">Fibre</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="removeTransmission(i)">Supprimer Transmission</button>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="addTransmission()">Ajouter Transmission</button>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+  </form>
+</div>
+
+
+  
